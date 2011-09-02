@@ -1,0 +1,23 @@
+<h1>Listing temps</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @temps.each do |temp| %>
+  <tr>
+    <td><%= temp.name %></td>
+    <td><%= link_to 'Show', temp %></td>
+    <td><%= link_to 'Edit', edit_temp_path(temp) %></td>
+    <td><%= link_to 'Destroy', temp, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Temp', new_temp_path %>
