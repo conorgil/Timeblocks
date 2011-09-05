@@ -1,0 +1,21 @@
+<h1>Show some timeblocks for <%= @user.email %> today!!</h1>
+
+<%= form_tag :timeblocks_update do %>
+  <h2>Time Blocks</h2>
+  <p><%= @timeblocks.count %></p>
+  <table>
+  <tr>
+    <th>Start</th>
+    <th>End</th>
+  </tr>
+  <% for @timeblock in @timeblocks %>
+    <%= fields_for "timeblock[]" do |t| %>
+    <tr>
+      <td><%= t.text_field :start %></td>
+      <td><%= t.text_field :end %></td>
+    </tr>
+    <% end %>
+  <% end %>
+  </table>
+  <p><%= submit_tag 'Update' %></p>
+<% end %>
