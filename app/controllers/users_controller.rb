@@ -13,10 +13,7 @@ class UsersController < ApplicationController
 		
 		respond_to do |format|
 			if @user.save
-<<<<<<< HEAD
-=======
 				session[:user] = @user
->>>>>>> 6d55a41567b9b7aaaa10ff1311358f738a3d0330
 				flash[:notice] = "User succesfully created"
 				format.html { redirect_to timeblocks_path }
 				format.xml  { render :xml => @user, :status => :created, :location => @user }			
@@ -38,4 +35,3 @@ class UsersController < ApplicationController
 			end
 		end		
 	end
-end
