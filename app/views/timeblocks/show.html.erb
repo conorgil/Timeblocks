@@ -1,9 +1,13 @@
-<h1>Show some timeblocks for <%= @user.email %> today!!</h1>
+<% content_for(:javascript) do %>
+<%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" %>
+<%= javascript_include_tag "timeblocks.js" %>  
+<% end %>
+
+<h1>Timeblocks for <%= @user.email %> for <%= @date.readable_inspect %></h1>
 
 <%= form_tag :timeblocks_update do %>
-  <h2>Time Blocks</h2>
-  <p><%= @timeblocks.count %></p>
-  <table>
+  <p>Timeblock count = <%= @timeblocks.count %></p>
+  <table id="timeblocks_table">
   <tr>
     <th>Start</th>
     <th>End</th>
@@ -17,5 +21,6 @@
     <% end %>
   <% end %>
   </table>
+  <a id="add_timeblock" href="#">Add Timeblock</a>
   <p><%= submit_tag 'Update' %></p>
 <% end %>

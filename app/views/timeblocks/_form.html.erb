@@ -1,0 +1,22 @@
+<tr>
+<%= form_for(@timeblock) do |f| %>
+  <% if @timeblock.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@timeblock.errors.count, "error") %> prohibited this timeblock from being saved:</h2>
+
+      <ul>
+      <% @timeblock.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	
+	<td>
+		<%= f.text_field :start %>
+	</td>
+	<td>
+		<%= f.text_field :end %>
+	</td>
+<% end %>
+</tr>
