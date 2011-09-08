@@ -1,15 +1,19 @@
 class TimeblocksController < ApplicationController
   def show
-	  @user = session[:user]
-	  @timeblocks = Timeblock.find_all_by_user_id(@user.id)
-	  @date = Date.today
+	  @user = session[:user] || User.new
+ 	  @date = Date.today
+	  @timeblocks = Timeblock.where("user_id = :user_id AND DATE(start) = :date",
+																	{:user_id => @user.id, :date => @date})
   end
 	
 	def update
+		redirect_to timeblocks_path
 	end
 	
 	def new
-		@timeblock = Timeblock.new
-		render :partial => "form"
+		@timeblock = Timeblock.new	
+		respond_to do |format|
+			format.html {render @timeblock, :layout => false}
+		end		
 	end
 end

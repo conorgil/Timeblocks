@@ -1,0 +1,25 @@
+<div class="timeblock">
+<%= form_for timeblock, :url => timeblocks_update_path  do |f| %>
+  <% if timeblock.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(timeblock.errors.count, "error") %> prohibited this timeblock from being saved:</h2>
+
+      <ul>
+      <% timeblock.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	
+	<div class="timeblock_start">
+		<%= f.text_field :start %>
+	</div>
+	<div>
+		<%= f.text_field :end %>
+	</div>
+	<div class="timeblock_end">
+		<%= f.submit "Update" %>
+	</div>
+<% end %>
+</div>

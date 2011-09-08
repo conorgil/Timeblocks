@@ -1,26 +1,16 @@
-<% content_for(:javascript) do %>
-<%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" %>
-<%= javascript_include_tag "timeblocks.js" %>  
-<% end %>
+
+
+<%= debug @user %>
 
 <h1>Timeblocks for <%= @user.email %> for <%= @date.readable_inspect %></h1>
 
-<%= form_tag :timeblocks_update do %>
-  <p>Timeblock count = <%= @timeblocks.count %></p>
-  <table id="timeblocks_table">
-  <tr>
-    <th>Start</th>
-    <th>End</th>
-  </tr>
-  <% for @timeblock in @timeblocks %>
-    <%= fields_for "timeblock[]" do |t| %>
-    <tr>
-      <td><%= t.text_field :start %></td>
-      <td><%= t.text_field :end %></td>
-    </tr>
-    <% end %>
-  <% end %>
-  </table>
-  <a id="add_timeblock" href="#">Add Timeblock</a>
-  <p><%= submit_tag 'Update' %></p>
-<% end %>
+<p>Timeblock count = <%= @timeblocks.count %></p>
+<div id="timeblocks_list">
+<div>
+  <div class="list_header">Start</div>
+  <div class="list_header">End</div>
+  <div class="list_header">-</div>
+</div>
+<%= render @timeblocks %>
+</div>
+<%= link_to 'Add Timeblock', timeblocks_new_path, :id => 'add_timeblock', :method=>:post, :remote => true  %>
