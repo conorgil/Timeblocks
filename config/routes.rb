@@ -7,19 +7,17 @@ Timeblocks::Application.routes.draw do
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
-	match 'timeblocks/new' => 'timeblocks#new'
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 	match 'login' => 'home#login', :as => :login
-	match 'timeblocks/show' => 'timeblocks#show', :as => :timeblocks
-  match 'timeblocks/update' => 'timeblocks#update', :as => :timeblocks_update
-	match 'timeblocks/new' => 'timeblocks#new', :as => :timeblocks_new
+	match 'timeblocks/show' => 'timeblocks#show', :as => :timeblocks_show
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :users
+  resources :timeblocks
 
   # Sample resource route with options:
   #   resources :products do

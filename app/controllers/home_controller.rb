@@ -7,7 +7,7 @@ class HomeController < ApplicationController
 		@user = User.find_by_email(params[:email])
 		if(@user && @user.password == params[:password])
 			session[:user] = @user
-			redirect_to timeblocks_path
+			redirect_to timeblocks_show_path
 		else
 			flash[:notice] = "Wrong user name or password!"
 			redirect_to :action => "index"
