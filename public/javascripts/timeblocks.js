@@ -4,7 +4,7 @@ jQuery(function($){
 
   $("#add_timeblock")
     .bind("ajax:success", function(event, data, status, xhr) {
-    	alert('success!!!! ' + xhr.responseText);
+    	//alert('success!!!! ' + xhr.responseText);
 			$("#timeblocks_table_body").append(xhr.responseText);
 		})
 		.bind("ajax:failure", function() {

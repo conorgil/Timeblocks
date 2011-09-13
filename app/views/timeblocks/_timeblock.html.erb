@@ -1,7 +1,7 @@
 <tr>
 <td>tag drop down</td>
-<td><%= text_field_tag timeblock.start %></td>
-<td><%= text_field_tag timeblock.end %></td>
+<td><%= text_field_tag 'start', timeblock.start %></td>
+<td><%= text_field_tag 'end', timeblock.end %></td>
   <td>
     <%= form_for timeblock, :remote => true, :html => {:class=>"timeblock_form"}  do |f| %>
       <% if timeblock.errors.any? %>
