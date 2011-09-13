@@ -1,6 +1,23 @@
 <tr>
 <td>tag drop down</td>
-<td>start time</td>
-<td>end time</td>
-<td>submit button</td>
+<td><%= text_field_tag timeblock.start %></td>
+<td><%= text_field_tag timeblock.end %></td>
+  <td>
+    <%= form_for timeblock, :remote => true, :html => {:class=>"timeblock_form"}  do |f| %>
+      <% if timeblock.errors.any? %>
+        <div id="error_explanation">
+          <h3><%= pluralize(timeblock.errors.count, "error") %> prohibited this timeblock from being saved:</h3>
+          <ul>
+          <% timeblock.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+	    <%= f.hidden_field :id %>
+	    <%= f.hidden_field :start %>
+	    <%= f.hidden_field :end %>
+	    <%= f.submit "Update" %>
+    <% end %>
+  </td>
 </tr>
