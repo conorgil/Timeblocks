@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 		
 		respond_to do |format|
 			if @user.save
-				session[:user] = @user
+				session[:user_id] = @user.id
 				flash[:notice] = "User succesfully created"
 				format.html { redirect_to timeblocks_path }
 				format.xml  { render :xml => @user, :status => :created, :location => @user }			

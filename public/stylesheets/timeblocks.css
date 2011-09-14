@@ -2,3 +2,13 @@
   margin: 0px;
   padding: 0px;
 }
+
+.success {
+	color: white;
+	background-color: green;
+}
+
+.failure {
+	color: black;
+	background-color: red;
+}
