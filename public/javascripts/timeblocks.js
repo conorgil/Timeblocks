@@ -54,7 +54,7 @@ function updateFormInputsFromCorrespondingTimeblock($form) {
 	var $tagInput = $form.closest('tr').find('#tag_string');
 	$form.children('#timeblock_tag_string').attr('value', $tagInput.attr('value'));
 	
-	debugShowFormAlert($form);
+	//debugShowFormAlert($form);
 }
 
 function debugShowFormAlert($form) {
