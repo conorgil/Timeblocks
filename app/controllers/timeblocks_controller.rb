@@ -28,6 +28,8 @@ class TimeblocksController < ApplicationController
 	def create
 		@user = User.find(session[:user_id])
 		@timeblock = Timeblock.new
+		@timeblock.user_id = @user.id
+		@timeblock.tag_string = params[:timeblock][:tag_string]
 		@timeblock.start = params[:timeblock][:start]
 		@timeblock.end = params[:timeblock][:end]
 
