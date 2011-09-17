@@ -16,7 +16,7 @@ jQuery(function($){
 		.bind("ajax:error", function(xhr, status, error) {
 			//alert("error!!! " + error);
 		});
-		
+
 	$(".timeblock_form")
     .live("ajax:success", function(event, data, status, xhr) {
     	//alert('success!!!! ' + xhr.responseText);
@@ -32,7 +32,7 @@ jQuery(function($){
 		.live("ajax:error", function(xhr, status, error) {
 			//alert("error!!! " + error);
 		})
-		.live("submit", function() {
+		.live("ajax:before", function() {
 			updateFormInputsFromCorrespondingTimeblock($(this));
 		});
 });
@@ -46,7 +46,8 @@ function updateFormInputsFromCorrespondingTimeblock($form) {
 	var $endDateInputElement = $form.parent().prev('td').children('input');
 	$form.children("#timeblock_end").attr('value', $endDateInputElement.attr('value'));
 		
-	alert('end {id = ' + $endDateInputElement.attr('id') + ", value = " + $endDateInputElement.attr('value') + "}");
+	//alert('{ start = ' + $form.children("#timeblock_start").attr('value') + 
+	//				' end = ' + $form.children("#timeblock_start").attr('value') + ' }');
 }
 
 function indicateResultStatus($elem, isSuccessful) {
