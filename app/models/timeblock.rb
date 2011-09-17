@@ -23,6 +23,7 @@ class Timeblock < ActiveRecord::Base
 				
 		# parse string and add tag for each tag name
 		tag_string.split(",").each do |tag_name|
+			tag_name = tag_name.strip
 			t = Tag.find_or_create_by_name_and_user_id(tag_name, user_id)
 			self.tags << t
 		end
