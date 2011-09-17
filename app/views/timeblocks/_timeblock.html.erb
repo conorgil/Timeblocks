@@ -1,5 +1,5 @@
 <tr>
-<td>tag drop down</td>
+<td><%= text_field_tag 'tag_string', timeblock.tag_string %></td>
 <td><%= text_field_tag 'start', timeblock.start %></td>
 <td><%= text_field_tag 'end', timeblock.end %></td>
   <td>
@@ -14,6 +14,7 @@
           </ul>
         </div>
       <% end %>
+      <%= f.hidden_field :tag_string %>
 	    <%= f.hidden_field :start %>
 	    <%= f.hidden_field :end %>
 	    <%= f.submit "Update" %>

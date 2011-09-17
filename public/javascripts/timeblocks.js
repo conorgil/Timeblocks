@@ -21,6 +21,7 @@ jQuery(function($){
     .live("ajax:success", function(event, data, status, xhr) {
     	//alert('success!!!! ' + xhr.responseText);
     	indicateResultStatus($(this), true);
+    	updateTimeblockTableRow($(this), xhr.responseText);
 		})
 		.live("ajax:failure", function() {
 			//alert("failure!!!");
@@ -37,17 +38,26 @@ jQuery(function($){
 		});
 });
 
+function updateTimeblockTableRow($form, newRowHtml) {
+	$form.closest('tr').replaceWith(newRowHtml);
+}
+
 function updateFormInputsFromCorrespondingTimeblock($form) {
 	// update start date in form with value from table
-	var $startDateInputElement = $form.parent().prev('td').prev('td').children('input');
-	$form.children("#timeblock_start").attr('value', $startDateInputElement.attr('value'));
+	var $startInput = $form.closest('tr').find('#timeblock_start');
+	$form.children('#timeblock_start').attr('value', $startInput.attr('value'));
 	
 	// update end date in form with value from table
-	var $endDateInputElement = $form.parent().prev('td').children('input');
-	$form.children("#timeblock_end").attr('value', $endDateInputElement.attr('value'));
-		
-	//alert('{ start = ' + $form.children("#timeblock_start").attr('value') + 
-	//				' end = ' + $form.children("#timeblock_start").attr('value') + ' }');
+	var $endInput = $form.closest('tr').find('#timeblock_end');
+	$form.children('#timeblock_end').attr('value', $endInput.attr('value'));
+
+	// update tag string in form with value from table
+	var $tagInput = $form.closest('tr').find('#timeblock_tag_string');
+	$form.children('#timeblock_tag_string').attr('value', $tagInput.attr('value'));
+	
+	alert('{ tag = ' + $form.children("#timeblock_tag_string").attr('value')+ ', ' +
+					'start = ' + $form.children("#timeblock_start").attr('value') + ', ' +
+					'end = ' + $form.children("#timeblock_end").attr('value') + ' }');
 }
 
 function indicateResultStatus($elem, isSuccessful) {
