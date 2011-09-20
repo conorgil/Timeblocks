@@ -1,6 +1,5 @@
 jQuery(function($){ 
-   // create a convenient toggleLoading function
-  var toggleLoading = function() { $("#loading").toggle() };
+   updateMetricsTable();
 
   $("#add_timeblock")
     .bind("ajax:success", function(event, data, status, xhr) {
@@ -22,6 +21,7 @@ jQuery(function($){
     	//alert('success!!!! ' + xhr.responseText);
     	var $updatedTimeblockRow = updateTimeblockTableRow($(this), xhr.responseText);
     	indicateResultStatus($updatedTimeblockRow, true);
+    	updateMetricsTable();
 		})
 		.live("ajax:failure", function() {
 			//alert("failure!!!");
@@ -84,3 +84,65 @@ function indicateResultStatus($timeblockRow, isSuccessful) {
 		$form.show();
 	}, 1000);
 }
+
+function updateMetricsTable() {
+	var $timeblocksTable = $('#timeblocks_table');
+	var $timeblocksRows = $timeblocksTable.find('tbody').find('tr');
+	
+	var metrics = [];
+	$timeblocksRows.each(function() {
+		var tags = $(this).find('#tag_string').val().split(',');
+		var startVal = $(this).find('#start').val();
+		var endVal = $(this).find('#end').val();
+		var durationMillis = new Date(endVal) - new Date(startVal);
+		var durationHours = durationMillis / (1000 * 60 * 60);
+		for(var i in tags) {
+			var tag = tags[i];
+			if(metrics[tag]) {
+				metrics[tag].totalMin = metrics[tag].totalMin + durationHours;
+			} else {
+				metrics[tag] = {tag: tag, totalMin: durationHours };
+			}
+		}
+	});
+	
+	var	$metricsTableBody = $('#metrics_table').find('tbody');
+	$metricsTableBody.find('tr').remove();
+	
+	for(var m in metrics) {
+			var metric = metrics[m];
+			var html = '<tr>';
+			html += '<td>'+metric.tag+'</td>';
+			html += '<td>'+metric.totalMin+'</td>';
+			html += '</tr>';
+			$metricsTableBody.append(html);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

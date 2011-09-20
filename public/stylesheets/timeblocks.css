@@ -12,3 +12,8 @@
 	color: black;
 	background-color: red;
 }
+
+.scrollable_container {
+	height: 400px;
+	overflow: auto;
+}
