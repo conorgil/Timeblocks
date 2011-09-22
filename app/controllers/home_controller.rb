@@ -13,4 +13,9 @@ class HomeController < ApplicationController
 			redirect_to :action => "index"
 		end
 	end
+	
+	def logout
+		session[:user_id] = nil
+		redirect_to :action => "index"
+	end
 end
