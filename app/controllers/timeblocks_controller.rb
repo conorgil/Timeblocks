@@ -32,6 +32,7 @@ class TimeblocksController < ApplicationController
 		@timeblock.tag_string = params[:timeblock][:tag_string]
 		@timeblock.start = params[:timeblock][:start]
 		@timeblock.end = params[:timeblock][:end]
+		@timeblock.note = params[:timeblock][:note]
 
     respond_to do |format|
       if @timeblock.save && @user.timeblocks << @timeblock
