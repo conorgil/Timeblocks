@@ -4,18 +4,18 @@
 }
 
 .success {
-	color: white;
-	background-color: green;
+	color: black;
+	background-color: #C5F598;
 }
 
 .failure {
 	color: black;
-	background-color: red;
+	background-color: #FAC2BB;
 }
 
 .scrollable_container {
 	height: 400px;
-	overflow: auto;
+	overflow-y: auto;
 }
 
 .tagCol {

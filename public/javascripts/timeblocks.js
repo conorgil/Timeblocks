@@ -19,7 +19,8 @@ jQuery(function($){
 	$(".timeblock_form")
     .live("ajax:success", function(event, data, status, xhr) {
     	//alert('success!!!! ' + xhr.responseText);
-    	var $updatedTimeblockRow = updateTimeblockTableRow($(this), xhr.responseText);
+    	var $updatedTimeblockRow = $(xhr.responseText);
+    	updateTimeblockTableRow($(this), $updatedTimeblockRow);
     	indicateResultStatus($updatedTimeblockRow, true);
     	updateMetricsTable();
 		})
@@ -68,23 +69,24 @@ function debugShowFormAlert($form) {
 }
 
 function indicateResultStatus($timeblockRow, isSuccessful) {
-	var v = isSuccessful ? "success" : "failure";
+	var c = isSuccessful ? "success" : "failure";
 	var $form = $timeblockRow.find('form');
-	var $formTdCell = $form.parent();
+	var $formContainingTd = $form.closest('td');
+	var $formContainingTr = $form.closest('tr');
 
 	// hide the form
 	$form.hide();
 
 	// change parent table cell class to success/failure
-	$formTdCell.attr('class', v);
+	$formContainingTr.find('td').addClass(c);
 	
 	// show text
-	$formTdCell.append('<p class="tempText">Successfully updated!</p>');
+	$formContainingTd.append('<p class="tempText">Successfully updated!</p>');
 	
 	// set back to normal
 	setTimeout(function() {
-		$formTdCell.children('.tempText').remove();
-		$formTdCell.attr('class', '');
+		$formContainingTd.children('.tempText').remove();
+		$formContainingTr.find('td').removeClass(c);
 		$form.show();
 	}, 1000);
 }
