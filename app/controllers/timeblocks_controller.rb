@@ -11,9 +11,9 @@ class TimeblocksController < ApplicationController
 		
 		respond_to do |format|
 			if @timeblock.update_attributes(params[:timeblock])
-				format.html {render @timeblock, :layout => false, :locals => {:action=>"update"} }
+				format.html {render @timeblock, :layout => false }
 			else
-				format.html {render @timeblock, :layout => false, :locals => {:action=>"update"} }
+				format.html {render @timeblock, :layout => false }
 			end
 		end
 	end
@@ -21,7 +21,7 @@ class TimeblocksController < ApplicationController
 	def new
 		@timeblock = Timeblock.new
 		respond_to do |format|
-			format.html {render @timeblock, :layout => false, :locals => {:action=>"create"} }
+			format.html {render @timeblock, :layout => false }
 		end
 	end
 	
@@ -35,12 +35,20 @@ class TimeblocksController < ApplicationController
 
     respond_to do |format|
       if @timeblock.save && @user.timeblocks << @timeblock
-        format.html {render @timeblock, :layout => false, :locals => {:action=>"update"} }
+        format.html {render @timeblock, :layout => false }
       else
-        format.html {render @timeblock, :layout => false, :locals => {:action=>"create"} }
+        format.html {render @timeblock, :layout => false }
       end
     end
 	end
+	
+	def destroy
+    @timeblock = Timeblock.find(params[:id])
+    @timeblock.destroy
+    respond_to do |format|
+        format.html {render :nothing => true }
+    end
+  end
 	
 	def daily_metrics
 		@user = User.find(session[:user_id])

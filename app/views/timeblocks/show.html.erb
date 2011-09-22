@@ -14,13 +14,7 @@
 
 <h1>Welcome, <%= @user.email %>!</h1>
 <h3><%= @date.readable_inspect %></h3>
-<h2><%= Time.zone %></h2>
-<p>You have <%= @timeblocks.count %> timeblocks logged for today.</p>
-<p>Try adding a new timeblock for Today by pasting the DateTime for right now 
-	(<%= DateTime.now %>) into the start time and end time.</p>
-<p>I am still working on error handling so you will get a success message even
-	if it didn't work. Try reloading the page and if the timeblock still shows up
-	then it worked!</p>
+
 <div class="scrollable_container">
 	<table id="timeblocks_table" class="zebra_striped">
 	  <thead>

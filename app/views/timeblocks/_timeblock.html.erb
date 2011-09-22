@@ -20,6 +20,13 @@
 	    <%= f.hidden_field :end %>
 	    <%= f.hidden_field :note %>
 	    <%= f.submit "Update" %>
+	    <% if timeblock.new_record? %>
+	    	<%= link_to 'Delete', '#', :class => 'remove_timeblock_row' %>
+		  <% else %>
+			  <%= link_to 'Delete', { :action => "destroy", :id => timeblock.id }, 
+	    								:confirm => "Are you sure you want to delete this timeblock?",
+										  :method => :delete, :remote => true, :class=>'destroy_timeblock_link' %>
+		  <% end %>
     <% end %>
   </td>
 </tr>

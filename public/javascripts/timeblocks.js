@@ -5,15 +5,6 @@ jQuery(function($){
     .bind("ajax:success", function(event, data, status, xhr) {
     	//alert('success!!!! ' + xhr.responseText);
 			$("#timeblocks_table_body").append(xhr.responseText);
-		})
-		.bind("ajax:failure", function() {
-			//alert("failure!!!");
-		})
-		.bind("ajax:complete", function() {
-			//alert("complete!!!");
-		})
-		.bind("ajax:error", function(xhr, status, error) {
-			//alert("error!!! " + error);
 		});
 
 	$(".timeblock_form")
@@ -24,17 +15,19 @@ jQuery(function($){
     	indicateResultStatus($updatedTimeblockRow, true);
     	updateMetricsTable();
 		})
-		.live("ajax:failure", function() {
-			//alert("failure!!!");
-		})
-		.live("ajax:complete", function() {
-			//alert("complete!!!");
-		})
-		.live("ajax:error", function(xhr, status, error) {
-			//alert("error!!! " + error);
-		})
 		.live("ajax:before", function() {
 			updateFormInputsFromCorrespondingTimeblock($(this));
+		});
+		
+	$(".destroy_timeblock_link")
+    .live("ajax:success", function(event, data, status, xhr) {
+    	//alert('success!!!! ' + xhr.responseText);
+    	removeClosestTableRow($(this));
+		});
+		
+	$(".remove_timeblock_row")
+    .live("click", function() {
+    	removeClosestTableRow($(this));
 		});
 });
 
@@ -137,7 +130,9 @@ function createDateTimeFromHourMinString(hour_min) {
 	return new Date(today.getFullYear(), today.getMonth(), today.getDate(), hour, min, 0, 0);
 }
 
-
+function removeClosestTableRow($obj) {
+	$obj.closest('tr').remove();
+}
 
 
 
