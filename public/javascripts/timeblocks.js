@@ -44,15 +44,19 @@ function updateTimeblockTableRow($form, newRowHtml) {
 function updateFormInputsFromCorrespondingTimeblock($form) {
 	// update start date in form with value from table
 	var $startInput = $form.closest('tr').find('#start');
-	$form.children('#timeblock_start').attr('value', $startInput.attr('value'));
+	$form.children('#timeblock_start').attr('value', createDateTimeFromHourMinString($startInput.attr('value')));
 	
 	// update end date in form with value from table
 	var $endInput = $form.closest('tr').find('#end');
-	$form.children('#timeblock_end').attr('value', $endInput.attr('value'));
+	$form.children('#timeblock_end').attr('value', createDateTimeFromHourMinString($endInput.attr('value')));
 
 	// update tag string in form with value from table
 	var $tagInput = $form.closest('tr').find('#tag_string');
 	$form.children('#timeblock_tag_string').attr('value', $tagInput.attr('value'));
+	
+	// update notes in form with value from table
+	var $noteInput = $form.closest('tr').find('#note');
+	$form.children('#timeblock_note').attr('value', $noteInput.attr('value'));
 	
 	//debugShowFormAlert($form);
 }
@@ -88,20 +92,24 @@ function indicateResultStatus($timeblockRow, isSuccessful) {
 function updateMetricsTable() {
 	var $timeblocksTable = $('#timeblocks_table');
 	var $timeblocksRows = $timeblocksTable.find('tbody').find('tr');
+	var today = new Date();
+	var todayDateString = today.getFullYear() + "-" + today.getMonth() + today.getDate()
 	
 	var metrics = [];
 	$timeblocksRows.each(function() {
 		var tags = $(this).find('#tag_string').val().split(',');
-		var startVal = $(this).find('#start').val();
-		var endVal = $(this).find('#end').val();
-		var durationMillis = new Date(endVal) - new Date(startVal);
-		var durationHours = durationMillis / (1000 * 60 * 60);
-		for(var i in tags) {
-			var tag = tags[i];
-			if(metrics[tag]) {
-				metrics[tag].totalMin = metrics[tag].totalMin + durationHours;
-			} else {
-				metrics[tag] = {tag: tag, totalMin: durationHours };
+		var startTimeVal = $(this).find('#start').val();
+		var endTimeVal = $(this).find('#end').val();
+		if(endTimeVal) {			
+			var durationMillis = createDateTimeFromHourMinString(endTimeVal) - createDateTimeFromHourMinString(startTimeVal);
+			var durationHours = durationMillis / (1000 * 60 * 60);
+			for(var i in tags) {
+				var tag = tags[i];
+				if(metrics[tag]) {
+					metrics[tag].totalMin = metrics[tag].totalMin + durationHours;
+				} else {
+					metrics[tag] = {tag: tag, totalMin: durationHours };
+				}
 			}
 		}
 	});
@@ -119,9 +127,13 @@ function updateMetricsTable() {
 	}
 }
 
-
-
-
+function createDateTimeFromHourMinString(hour_min) {
+	var today = new Date();
+	var a = hour_min.split(":");
+	var hour = a[0];
+	var min = a[1];
+	return new Date(today.getFullYear(), today.getMonth(), today.getDate(), hour, min, 0, 0);
+}
 
 
 

@@ -17,3 +17,11 @@
 	height: 400px;
 	overflow: auto;
 }
+
+.tagCol {
+	width: 220px;
+}
+
+.timeCol {
+	width: 100px;
+}

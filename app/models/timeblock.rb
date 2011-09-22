@@ -3,6 +3,16 @@ class Timeblock < ActiveRecord::Base
 	has_and_belongs_to_many :tags
 	
 	validates_presence_of :user_id
+	validates_presence_of :start
+	
+	MILLIS_PER_SECOND = 1000
+	SECONDS_PER_MINUTE = 60
+	MINUTES_PER_HOUR = 60
+		
+	def self.find_by_user_id_and_similar_date(id, date)
+		self.where("user_id = :user_id AND DATE(start) = :date",
+													{:user_id => id, :date => date})
+	end
 	
 	def tag_string
 		tag_string = ""
@@ -28,5 +38,32 @@ class Timeblock < ActiveRecord::Base
 			self.tags << t
 		end
 		self.save
+	end
+
+	def durationInHours
+		(self.end - self.start) / (SECONDS_PER_MINUTE * MINUTES_PER_HOUR)
+	end
+	
+	def displayStartTime
+		displayDateTime(self.start)
+	end
+	
+	def displayEndTime
+		displayDateTime(self.end)
+	end
+	
+	private
+	
+	def displayDateTime(datetime)
+		if(datetime)
+			str = datetime.hour.to_s + ":" + datetime.min.to_s
+			if(str.end_with? ':0')
+				str += "0"
+			else
+				str
+			end
+		else
+			""
+		end
 	end
 end
