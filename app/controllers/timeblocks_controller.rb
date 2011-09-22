@@ -1,9 +1,10 @@
-class TimeblocksController < ApplicationController
+include DailyMetricRow
+class TimeblocksController < ApplicationController  
   def show
 	  @user = User.find(session[:user_id])
  	  @date = Date.today
-	  @timeblocks = Timeblock.where("user_id = :user_id AND DATE(start) = :date",
-																	{:user_id => @user.id, :date => @date})
+	  @timeblocks = Timeblock.find_by_user_id_and_similar_date(@user.id, @date)
+	  @dailyMetricRows = DailyMetricRow.getDailyMetricRowsFromTimeblocks(@timeblocks)
   end
 	
 	def update
@@ -40,5 +41,11 @@ class TimeblocksController < ApplicationController
         format.html {render @timeblock, :layout => false, :locals => {:action=>"create"} }
       end
     end
+	end
+	
+	def daily_metrics
+		@user = User.find(session[:user_id])
+		@timeblocks = Timeblock.find_by_user_id_and_similar_date(@user.id, @date)
+		@dailyMetricRows = DailyMetricRow.getDailyMetricRowsFromTimeblocks(@timeblocks)
 	end
 end

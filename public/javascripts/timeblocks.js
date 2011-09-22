@@ -88,20 +88,25 @@ function indicateResultStatus($timeblockRow, isSuccessful) {
 function updateMetricsTable() {
 	var $timeblocksTable = $('#timeblocks_table');
 	var $timeblocksRows = $timeblocksTable.find('tbody').find('tr');
+	var today = new Date();
+	var todayDateString = today.getFullYear() + "-" + today.getMonth() + today.getDate()
 	
 	var metrics = [];
 	$timeblocksRows.each(function() {
 		var tags = $(this).find('#tag_string').val().split(',');
-		var startVal = $(this).find('#start').val();
-		var endVal = $(this).find('#end').val();
-		var durationMillis = new Date(endVal) - new Date(startVal);
-		var durationHours = durationMillis / (1000 * 60 * 60);
-		for(var i in tags) {
-			var tag = tags[i];
-			if(metrics[tag]) {
-				metrics[tag].totalMin = metrics[tag].totalMin + durationHours;
-			} else {
-				metrics[tag] = {tag: tag, totalMin: durationHours };
+		var startTimeVal = $(this).find('#start').val();
+		var endTimeVal = $(this).find('#end').val();
+		if(endTimeVal) {
+			var startDateTime = new Date()
+			var durationMillis = new Date(endVal) - new Date(startVal);
+			var durationHours = durationMillis / (1000 * 60 * 60);
+			for(var i in tags) {
+				var tag = tags[i];
+				if(metrics[tag]) {
+					metrics[tag].totalMin = metrics[tag].totalMin + durationHours;
+				} else {
+					metrics[tag] = {tag: tag, totalMin: durationHours };
+				}
 			}
 		}
 	});

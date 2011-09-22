@@ -7,40 +7,28 @@
 <%= javascript_include_tag "timeblocks" %>
 <% end %>
 
-<div class="container">
-  <h1>Welcome, <%= @user.email %>!</h1>
-  <h3><%= @date.readable_inspect %></h3>
-  <p>You have <%= @timeblocks.count %> timeblocks logged for today.</p>
-  <p>Try adding a new timeblock for Today by pasting the DateTime for right now 
-  	(<%= DateTime.now %>) into the start time and end time.</p>
-  <p>I am still working on error handling so you will get a success message even
-  	if it didn't work. Try reloading the page and if the timeblock still shows up
-  	then it worked!</p>
-  <div class="scrollable_container">
-		<table id="timeblocks_table" class="zebra_striped">
-		  <thead>
-		    <th>Tag(s)</th>
-		    <th>Start</th>
-		    <th>End</th>
-		    <th></th>
-		  </thead>
-		  <tbody id="timeblocks_table_body">
-		    <%= render @timeblocks %>
-		  </tbody>
-		</table>
-  </div>
-  <%= link_to 'Add Timeblock', new_timeblock_path, :id => 'add_timeblock', :method=>:get, :remote => true  %>
 
-	<div id="metrics" class="container">
-		<h2>Tag stats</h2>
-			<table id="metrics_table" class="zebra_striped">
-		  <thead>
-		    <th>Tag</th>
-		    <th>Total hours</th>
-		  </thead>
-		  <tbody id="timeblocks_table_body">
-		  
-		  </tbody>
-		</table>
-	</div>
+<h1>Welcome, <%= @user.email %>!</h1>
+<h3><%= @date.readable_inspect %></h3>
+<p>You have <%= @timeblocks.count %> timeblocks logged for today.</p>
+<p>Try adding a new timeblock for Today by pasting the DateTime for right now 
+	(<%= DateTime.now %>) into the start time and end time.</p>
+<p>I am still working on error handling so you will get a success message even
+	if it didn't work. Try reloading the page and if the timeblock still shows up
+	then it worked!</p>
+<div class="scrollable_container">
+	<table id="timeblocks_table" class="zebra_striped">
+	  <thead>
+	    <th>Tag(s)</th>
+	    <th>Start</th>
+	    <th>End</th>
+	    <th></th>
+	  </thead>
+	  <tbody id="timeblocks_table_body">
+	    <%= render @timeblocks %>
+	  </tbody>
+	</table>
 </div>
+<%= link_to 'Add Timeblock', new_timeblock_path, :id => 'add_timeblock', :method=>:get, :remote => true  %>
+
+<%= render 'daily_metrics', :locals => {:dailyMetricRows => @dailyMetricRows} %>
