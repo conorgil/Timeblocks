@@ -14,6 +14,15 @@ class Timeblock < ActiveRecord::Base
 													{:user_id => id, :date => date})
 	end
 	
+	MILLIS_PER_SECOND = 1000
+	SECONDS_PER_MINUTE = 60
+	MINUTES_PER_HOUR = 60
+		
+	def self.find_by_user_id_and_similar_date(id, date)
+		self.where("user_id = :user_id AND DATE(start) = :date",
+													{:user_id => id, :date => date})
+	end
+	
 	def tag_string
 		tag_string = ""
 		self.tags.each do |tag|
@@ -39,7 +48,7 @@ class Timeblock < ActiveRecord::Base
 		end
 		self.save
 	end
-
+	
 	def durationInHours
 		(self.end - self.start) / (SECONDS_PER_MINUTE * MINUTES_PER_HOUR)
 	end
@@ -56,12 +65,7 @@ class Timeblock < ActiveRecord::Base
 	
 	def displayDateTime(datetime)
 		if(datetime)
-			str = datetime.hour.to_s + ":" + datetime.min.to_s
-			if(str.end_with? ':0')
-				str += "0"
-			else
-				str
-			end
+			datetime.hour.to_s + ":" + datetime.min.to_s
 		else
 			""
 		end

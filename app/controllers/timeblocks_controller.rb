@@ -1,3 +1,4 @@
+
 class TimeblocksController < ApplicationController  
   def show
 	  @user = User.find(session[:user_id])
@@ -34,13 +35,13 @@ class TimeblocksController < ApplicationController
 		@timeblock.end = params[:timeblock][:end]
 		@timeblock.note = params[:timeblock][:note]
 
-    respond_to do |format|
-      if @timeblock.save && @user.timeblocks << @timeblock
-        format.html {render @timeblock, :layout => false }
-      else
-        format.html {render @timeblock, :layout => false }
-      end
-    end
+		respond_to do |format|
+		  if @timeblock.save && @user.timeblocks << @timeblock
+		    format.html {render @timeblock, :layout => false }
+		  else
+		    format.html {render @timeblock, :layout => false }
+		  end
+		end
 	end
 	
 	def destroy
