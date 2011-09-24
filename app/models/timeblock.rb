@@ -65,7 +65,12 @@ class Timeblock < ActiveRecord::Base
 	
 	def displayDateTime(datetime)
 		if(datetime)
-			datetime.hour.to_s + ":" + datetime.min.to_s
+			str = datetime.hour.to_s + ":" + datetime.min.to_s
+			if(str.end_with? ':0')
+				str += "0"
+			else
+				str
+			end
 		else
 			""
 		end
