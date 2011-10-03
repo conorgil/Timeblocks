@@ -12,7 +12,7 @@ Timeblocks::Application.routes.draw do
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 	match 'login' => 'home#login', :as => :login
-	match 'login' => 'home#logout', :as => :logout
+	match 'logout' => 'home#logout', :as => :logout
 	match 'timeblocks/show' => 'timeblocks#show', :as => :timeblocks_show
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
