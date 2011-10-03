@@ -23,11 +23,13 @@ jQuery(function($){
     .live("ajax:success", function(event, data, status, xhr) {
     	//alert('success!!!! ' + xhr.responseText);
     	removeClosestTableRow($(this));
+    	updateMetricsTable();
 		});
 		
 	$(".remove_timeblock_row")
     .live("click", function() {
     	removeClosestTableRow($(this));
+    	updateMetricsTable();
 		});
 });
 
