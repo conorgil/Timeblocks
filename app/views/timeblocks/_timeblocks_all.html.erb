@@ -1,0 +1,39 @@
+<tr>
+	<td>
+	<% if(timeblock.start.nil?) %>
+	<p>none</p>
+	<% else %>
+	<%= timeblock.start.to_date.readable_inspect %>
+	<% end %>
+	</td>
+	<td><%= text_field_tag 'tag_string', timeblock.tag_string, :class=>'tagCol'%></td>
+	<td><%= text_field_tag 'start', timeblock.displayStartTime, :class=>'timeCol' %></td>
+	<td><%= text_field_tag 'end', timeblock.displayEndTime, :class=>'timeCol' %></td>
+	<td><%= text_field_tag 'note', timeblock.note %></td>
+  <td>
+    <%= form_for timeblock, :remote => true, :html => {:class=>"timeblock_form"}  do |f| %>
+      <% if timeblock.errors.any? %>
+        <div id="error_explanation">
+          <h3><%= pluralize(timeblock.errors.count, "error") %> prohibited this timeblock from being saved:</h3>
+          <ul>
+          <% timeblock.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <%= f.hidden_field :tag_string %>
+	    <%= f.hidden_field :start %>
+	    <%= f.hidden_field :end %>
+	    <%= f.hidden_field :note %>
+	    <%= f.submit "Update" %>
+	    <% if timeblock.new_record? %>
+	    	<%= link_to 'Delete', '#', :class => 'remove_timeblock_row' %>
+		  <% else %>
+			  <%= link_to 'Delete', { :action => "destroy", :id => timeblock.id }, 
+	    								:confirm => "Are you sure you want to delete this timeblock?",
+										  :method => :delete, :remote => true, :class=>'destroy_timeblock_link' %>
+		  <% end %>
+    <% end %>
+  </td>
+</tr>

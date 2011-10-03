@@ -1,0 +1,46 @@
+<% content_for :css do %>
+<%= stylesheet_link_tag "timeblocks.css" %>
+<%= stylesheet_link_tag "bootstrap-1.2.0.min.css" %>
+<% end %>
+
+<% content_for :javascript do %>
+<%= javascript_include_tag "timeblocks" %>
+<% end %>
+
+<% content_for :header do %>
+<%= render 'shared/header' %>
+<% end %>
+
+
+<h1>Welcome, <%= @user.email %>!</h1>
+<h3>All timeblocks</h3>
+
+<div class="scrollable_container">
+	<table id="timeblocks_table" class="zebra_striped">
+	  <thead>
+	  	<th class="dateCol">Date</th>
+	    <th class="tagCol">Tag(s)</th>
+	    <th class="timeCol">Start time</th>
+	    <th class="timeCol">End time</th>
+	    <th>Note</th>
+	    <th></th>
+	  </thead>
+	  <tbody id="timeblocks_table_body">
+	    <%= render :partial => "timeblocks_all", :collection => @timeblocks, :as => :timeblock %>
+	  </tbody>
+	</table>
+</div>
+<%= link_to 'Add Timeblock', new_timeblock_path, :id => 'add_timeblock', :method=>:get, :remote => true  %>
+
+<div id="metrics" class="container">
+	<h2>Tag stats</h2>
+		<table id="metrics_table" class="zebra_striped">
+	  <thead>
+	    <th>Tag</th>
+	    <th>Total hours</th>
+	  </thead>
+	  <tbody id="metrics_table_body">
+	  
+	  </tbody>
+	</table>
+</div>

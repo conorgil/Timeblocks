@@ -14,7 +14,9 @@ Timeblocks::Application.routes.draw do
 	match 'login' => 'home#login', :as => :login
 	match 'logout' => 'home#logout', :as => :logout
 	match 'timeblocks/show' => 'timeblocks#show', :as => :timeblocks_show
-
+	match 'timeblocks/all' => 'timeblocks#all', :as => :timeblocks_all
+	
+	
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :users

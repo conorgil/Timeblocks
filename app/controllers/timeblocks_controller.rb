@@ -6,6 +6,11 @@ class TimeblocksController < ApplicationController
 	  @timeblocks = Timeblock.find_by_user_id_and_similar_date(@user.id, @date)
 	  #@dailyMetricRows = DailyMetricRow.getDailyMetricRowsFromTimeblocks(@timeblocks)
   end
+  
+  def all
+	  @user = User.find(session[:user_id])
+	  @timeblocks = Timeblock.find_all_by_user_id(@user.id)
+  end
 	
 	def update
 		@timeblock = Timeblock.find_by_id(params[:id])
