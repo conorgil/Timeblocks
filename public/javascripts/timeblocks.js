@@ -89,8 +89,6 @@ function indicateResultStatus($timeblockRow, isSuccessful) {
 function updateMetricsTable() {
 	var $timeblocksTable = $('#timeblocks_table');
 	var $timeblocksRows = $timeblocksTable.find('tbody').find('tr');
-	var today = new Date();
-	var todayDateString = today.getFullYear() + "-" + today.getMonth() + today.getDate()
 	
 	var metrics = [];
 	$timeblocksRows.each(function() {
@@ -125,11 +123,15 @@ function updateMetricsTable() {
 }
 
 function createDateTimeFromHourMinString(hour_min) {
-	var today = new Date();
-	var a = hour_min.split(":");
-	var hour = a[0];
-	var min = a[1];
-	return new Date(today.getFullYear(), today.getMonth(), today.getDate(), hour, min, 0, 0);
+	var dateShownStringArray = $("#date_shown").text().split("-");
+	var dateShownYear = dateShownStringArray[0];
+	var dateShownMonth = dateShownStringArray[1];
+	var dateShownDay = dateShownStringArray[2];
+	
+	var timeEnteredStringArray = hour_min.split(":");
+	var hour = timeEnteredStringArray[0];
+	var min = timeEnteredStringArray[1];
+	return new Date(dateShownYear, dateShownMonth-1, dateShownDay, hour, min, 0, 0);
 }
 
 function removeClosestTableRow($obj) {

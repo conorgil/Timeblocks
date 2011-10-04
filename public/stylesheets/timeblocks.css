@@ -44,3 +44,7 @@
 .next_day {
   margin-left: 10px;
 }
+
+.date_shown {
+	display: none;
+}

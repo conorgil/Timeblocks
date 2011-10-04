@@ -11,6 +11,8 @@
 <%= render 'shared/header' %>
 <% end %>
 
+<div id="date_shown"><%= @date %></div>
+
 <%=  render :partial=>'date_banner', :locals=>{:date=>@date} %>
 
 <div class="scrollable_container">
