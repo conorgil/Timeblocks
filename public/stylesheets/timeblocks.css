@@ -25,3 +25,22 @@
 .timeCol {
 	width: 100px;
 }
+
+#date_banner {
+  margin-top: 65px;
+  display: inline-block;
+  width: 100%;
+}
+
+#date_banner form, #date_banner h2 {
+  float: left;
+}
+
+.prev_day {
+  margin-left: 25%;
+  margin-right: 10px;
+}
+
+.next_day {
+  margin-left: 10px;
+}

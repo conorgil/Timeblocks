@@ -1,0 +1,11 @@
+<div id="date_banner">
+  <%= form_tag timeblocks_show_path, :method=>:get, :class=>'prev_day' do %>
+    <%= hidden_field_tag 'date', date.yesterday %>
+    <%= submit_tag '<< prev day', :class=>'btn small' %>
+  <% end %>
+  <h2><%= date.readable_inspect %></h2>
+  <%= form_tag timeblocks_show_path, :method=>:get, :class=>'next_day' do %>
+    <%= hidden_field_tag 'date', date.tomorrow %>
+    <%= submit_tag 'next day >>', :class=>'btn small' %>
+  <% end %>
+</div>

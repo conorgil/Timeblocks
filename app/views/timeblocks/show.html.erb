@@ -11,9 +11,7 @@
 <%= render 'shared/header' %>
 <% end %>
 
-
-<h1>Welcome, <%= @user.email %>!</h1>
-<h3><%= @date.readable_inspect %></h3>
+<%=  render :partial=>'date_banner', :locals=>{:date=>@date} %>
 
 <div class="scrollable_container">
 	<table id="timeblocks_table" class="zebra_striped">
@@ -29,6 +27,7 @@
 	  </tbody>
 	</table>
 </div>
+
 <%= link_to 'Add Timeblock', new_timeblock_path, :id => 'add_timeblock', :method=>:get, :remote => true  %>
 
 <div id="metrics" class="container">

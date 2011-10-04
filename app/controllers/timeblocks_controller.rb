@@ -2,7 +2,7 @@
 class TimeblocksController < ApplicationController  
   def show
 	  @user = User.find(session[:user_id])
- 	  @date = Date.today
+ 	  @date = Date.parse(params[:date]) || Date.today
 	  @timeblocks = Timeblock.find_by_user_id_and_similar_date(@user.id, @date)
 	  #@dailyMetricRows = DailyMetricRow.getDailyMetricRowsFromTimeblocks(@timeblocks)
   end
