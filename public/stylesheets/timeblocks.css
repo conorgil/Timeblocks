@@ -26,8 +26,11 @@
 	width: 100px;
 }
 
-#date_banner {
+.below_header {
   margin-top: 50px;
+}
+
+#date_banner {
   display: inline-block;
   width: 100%;
 }

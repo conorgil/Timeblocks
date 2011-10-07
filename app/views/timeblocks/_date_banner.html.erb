@@ -1,4 +1,4 @@
-<div id="date_banner">
+<div id="date_banner" class="below_header">
   <%= form_tag timeblocks_show_path, :method=>:get, :class=>'prev_day' do %>
     <%= hidden_field_tag 'date', date.yesterday %>
     <%= submit_tag '<< prev day', :class=>'btn small' %>

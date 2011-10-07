@@ -16,6 +16,29 @@ class TimeblocksController < ApplicationController
 	  @timeblocks = Timeblock.find_all_by_user_id(@user.id)
   end
 	
+	def history
+		@user = User.find(session[:user_id])
+		@date = Date.today
+		
+		if(params[:start].nil?)
+ 	    @start_date = Date.today
+ 	  else
+ 	    @start_date = Date.parse(params[:start])
+ 	  end
+		
+		if(params[:end].nil?)
+ 	    @end_date = Date.today
+ 	  else
+ 	    @end_date = Date.parse(params[:end])
+ 	  end
+		
+		if(@start_date > @end_date)
+			@start_date = @end_date
+		end
+		
+		@timeblocks = Timeblock.find_all_by_user_id_and_date_range(@user.id, @start_date, @end_date)
+	end
+	
 	def update
 		@timeblock = Timeblock.find_by_id(params[:id])
 		

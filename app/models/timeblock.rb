@@ -14,13 +14,9 @@ class Timeblock < ActiveRecord::Base
 													{:user_id => id, :date => date})
 	end
 	
-	MILLIS_PER_SECOND = 1000
-	SECONDS_PER_MINUTE = 60
-	MINUTES_PER_HOUR = 60
-		
-	def self.find_by_user_id_and_similar_date(id, date)
-		self.where("user_id = :user_id AND DATE(start) = :date",
-													{:user_id => id, :date => date})
+	def self.find_all_by_user_id_and_date_range(id, start_date, end_date)
+		self.where("user_id = :user_id AND DATE(start) >= :start_date AND DATE(start) <= :end_date",
+								{:user_id => id, :start_date => start_date, :end_date => end_date})
 	end
 	
 	def tag_string
