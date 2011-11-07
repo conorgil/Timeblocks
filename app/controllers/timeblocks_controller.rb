@@ -1,5 +1,7 @@
 
-class TimeblocksController < ApplicationController  
+class TimeblocksController < ApplicationController
+  before_filter :date_time_format
+
   def show
 	  @user = User.find(session[:user_id])
  	  if(params[:date].nil?)
@@ -88,5 +90,11 @@ class TimeblocksController < ApplicationController
 		@user = User.find(session[:user_id])
 		@timeblocks = Timeblock.find_by_user_id_and_similar_date(@user.id, @date)
 		#@dailyMetricRows = DailyMetricRow.getDailyMetricRowsFromTimeblocks(@timeblocks)
+	end
+	
+	private
+	
+	def date_time_format
+	  @date_time_format = "%m/%d/%Y"
 	end
 end

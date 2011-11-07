@@ -1,10 +1,12 @@
 <% content_for :css do %>
 <%= stylesheet_link_tag "timeblocks.css" %>
 <%= stylesheet_link_tag "bootstrap-1.2.0.min.css" %>
+<%= stylesheet_link_tag "ui-darkness/jquery-ui-1.8.16.custom.css" %>
 <% end %>
 
 <% content_for :javascript do %>
-<%= javascript_include_tag "timeblocks" %>
+<%= javascript_include_tag "timeblocks.js" %>
+<%= javascript_include_tag "jquery-ui.min.js" %>
 <% end %>
 
 <% content_for :header do %>
@@ -17,17 +19,13 @@
 <div class="below_header">
 	<%= form_tag timeblocks_history_path, :method=>:get, :class => 'date_range_form' do %>
 	  <p>Show all timeblocks from
-	  <%= text_field_tag 'start' %>
+	  <%= text_field_tag 'start', @start_date.strftime(@date_time_format), :class=>'datepicker' %>
 		through
-	  <%= text_field_tag 'end' %>
+	  <%= text_field_tag 'end', @end_date.strftime(@date_time_format), :class=>'datepicker' %>
 	  .
 	  <%= submit_tag 'Submit', :class => 'btn small' %>
 	  </p>
 	<% end %>
-</div>
-
-<div id="date_banner">
-	<h3><%= @start_date %> thru <%= @end_date %></h3>
 </div>
 
 <div class="scrollable_container">

@@ -31,6 +31,10 @@ jQuery(function($){
     	removeClosestTableRow($(this));
     	updateMetricsTable();
 		});
+		
+	$(function() {
+		$( ".datepicker" ).datepicker();
+	});
 });
 
 function updateTimeblockTableRow($form, newRowHtml) {
