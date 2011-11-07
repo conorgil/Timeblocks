@@ -39,6 +39,10 @@
   float: left;
 }
 
+#date_banner p {
+  font-size: large;
+}
+
 .prev_day {
   margin-left: 25%;
   margin-right: 10px;

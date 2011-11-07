@@ -16,13 +16,12 @@
 <!-- horrible hack to get the metrics to calculate correctly. definitely remove this -->
 <div id="date_shown"><%= @date %></div>
 
-<div class="below_header">
+<div id="date_banner" class="below_header">
 	<%= form_tag timeblocks_history_path, :method=>:get, :class => 'date_range_form' do %>
 	  <p>Show all timeblocks from
 	  <%= text_field_tag 'start', @start_date.strftime(@date_time_format), :class=>'datepicker' %>
-		through
+		to
 	  <%= text_field_tag 'end', @end_date.strftime(@date_time_format), :class=>'datepicker' %>
-	  .
 	  <%= submit_tag 'Submit', :class => 'btn small' %>
 	  </p>
 	<% end %>
