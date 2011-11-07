@@ -25,13 +25,13 @@ class TimeblocksController < ApplicationController
 		if(params[:start].nil?)
  	    @start_date = Date.today
  	  else
- 	    @start_date = Date.parse(params[:start])
+ 	    @start_date = Date.parse(params[:start], @date_time_format)
  	  end
 		
 		if(params[:end].nil?)
  	    @end_date = Date.today
  	  else
- 	    @end_date = Date.parse(params[:end])
+ 	    @end_date = Date.strptime(params[:end], @date_time_format)
  	  end
 		
 		if(@start_date > @end_date)
