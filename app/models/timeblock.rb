@@ -10,24 +10,15 @@ class Timeblock < ActiveRecord::Base
 	MINUTES_PER_HOUR = 60
 		
 	def self.find_by_user_id_and_similar_date(id, date)
-		self.where("user_id = :user_id AND DATE(start) = :date",
-													{:user_id => id, :date => date})
+		self.where(:user_id => id, :start => date)
 	end
 	
 	def self.find_all_by_user_id_and_date_range(id, start_date, end_date)
-		self.where("user_id = :user_id AND DATE(start) >= :start_date AND DATE(start) <= :end_date",
-								{:user_id => id, :start_date => start_date, :end_date => end_date})
+		self.where(:user_id => id, :start => start_date..end_date)
 	end
 	
 	def tag_string
-		tag_string = ""
-		self.tags.each do |tag|
-			tag_string += tag.name + ", "
-		end
-		if tag_string.end_with? ", "
-			tag_string.slice! tag_string.length-2..tag_string.length
-		end
-		tag_string
+		tags.map(&:name).join(", ")
 	end
 	
 	def tag_string=(tag_string)
@@ -38,8 +29,7 @@ class Timeblock < ActiveRecord::Base
 				
 		# parse string and add tag for each tag name
 		tag_string.split(",").each do |tag_name|
-			tag_name = tag_name.strip
-			t = Tag.find_or_create_by_name_and_user_id(tag_name, user_id)
+			t = Tag.find_or_create_by_name_and_user_id(tag_name.strip, user_id)
 			self.tags << t
 		end
 		self.save
