@@ -21,6 +21,7 @@ Timeblocks::Application.routes.draw do
   #   resources :products
   resources :users
   resources :timeblocks
+  resources :tags
 
   # Sample resource route with options:
   #   resources :products do
